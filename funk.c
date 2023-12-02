@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "func.h"
-int i;
 void create (ochki**arr, int*n) {
 	printf("number of positions =");
 	scanf("%d",n);
@@ -32,7 +31,7 @@ void read (ochki**arr, int*n){
                 
 	*arr=(ochki*)calloc(*n, sizeof(ochki));
 		for (int i=0; i<*n; i++)
-			(fscanf(fp,"%s %s %d %d", (*arr)[i].color, (*arr)[i].country, (*arr)[i].price, (*arr)[i].size));
+			fscanf(fp,"%s %s %d %d", (*arr)[i].color, (*arr)[i].country, &(*arr)[i].price, &(*arr)[i].size);
 fclose(fp);}
 
 	
@@ -56,7 +55,7 @@ void search (ochki*arr,int n){
           " 4 - size\n");
           int key;
           int k;
-          char str;
+          char str[40];
    scanf("%d", &key);
    printf("vvedite iskomoe znachenie: ");
  
@@ -64,7 +63,7 @@ void search (ochki*arr,int n){
    {
       case 1:
          scanf("%s", str);
-         for (i = 0; i < n; i++)
+         for (int i = 0; i < n; i++)
          {
             if (!strcmp(arr[i].color, str))
             {
@@ -75,7 +74,7 @@ void search (ochki*arr,int n){
  
       case 2:
          scanf("%s", str);
-         for (i = 0; i < n; i++)
+         for (int i = 0; i < n; i++)
          {
             if (!strcmp(arr[i].country, str))
             {
@@ -85,17 +84,19 @@ void search (ochki*arr,int n){
          break;
  
       case 3:
-         if(scanf("%d", &k)==1){
-         	if(k<0){
-         		return;}
-         for (i = 0; i < n; i++)
+         if(scanf("%d", &k)==1)
          {
-            if (k == arr[i].price)
-            {
-             printf("%s %s %d %d\n", arr[i].color, arr[i].country, arr[i].price, arr[i].size);
-            }
-         }
-         }
+         	if(k<0){
+         		return;
+         	}
+        	 for (int i = 0; i < n; i++)
+         	{
+           	 	if (k == arr[i].price)
+          		  {
+            			 printf("%s %s %d %d\n", arr[i].color, arr[i].country, arr[i].price, arr[i].size);
+          	 	 }
+       		  }
+ 	}
          break;
  
  
@@ -103,7 +104,7 @@ void search (ochki*arr,int n){
          if(scanf("%d", &k)==1){
          	if(k<0){
          		return;}
-         for (i = 0; i < n; i++)
+         for (int i = 0; i < n; i++)
          {
             if (k == arr[i].price)
             {
